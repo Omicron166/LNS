@@ -3,7 +3,8 @@ How to start the server:
     2: Run a http server on the server folder (Ex: python3 -m http.server)
 
 How to register a name:
-    1: Copy template.json to new-name.json changing new-name for the name you want to register
-    2: Edit the data in new-name.json
+    1: Get in records directory
+    2: Copy template.json to new-name.json changing new-name for the name you want to register
+    3: Edit the data in new-name.json
             link record can be an url or an ip address
             txt record can be left blank
