@@ -18,14 +18,14 @@ class Client(object):
             self.server = 'http://' + url.netloc
         else:
             self.server = url.scheme + '://' + url.netloc
-        status = requests.get(self.server + '/version.json').json()
+        status = requests.get(self.server + '/index.json').json()
         if not status['version'] in server_version:
             raise IncompatibleServer()
 
     def resolve(self, name: str):
         try:
-            r = requests.get(self.server + '/' + name)
-            if r.status_code != 200: raise Exception()
+            r = requests.get(self.server + '/records/' + name + '.json')
+            if r.status_code != 200: raise NameNotFound()
         except: raise NameNotFound('The record does not exist')
 
         try: return r.json()['record']['link']
