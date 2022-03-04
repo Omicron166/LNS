@@ -2,7 +2,7 @@ import requests
 from urllib.parse import urlparse
 
 #accepted server version
-server_version = 1
+server_version = [1]
 
 class IncompatibleServer(Exception):
     pass
@@ -19,7 +19,7 @@ class Client(object):
         else:
             self.server = url.scheme + '://' + url.netloc
         status = requests.get(self.server + '/version.json').json()
-        if not status['version'] == server_version:
+        if not status['version'] in server_version:
             raise IncompatibleServer()
 
     def resolve(self, name: str):
