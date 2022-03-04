@@ -1,0 +1,7 @@
+{
+    "recorder": "Omicron166",
+    "record": {
+        "link": "dns.google.com or 8.8.8.8",
+        "txt": "dns like txt record"
+    }
+}
