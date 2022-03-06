@@ -1,3 +1,6 @@
+#Written by Omicron166
+#Version 1.1.2
+
 import requests
 from urllib.parse import urlparse
 
@@ -9,7 +12,6 @@ class IncompatibleServer(Exception):
 
 class NameNotFound(Exception):
     pass
-
 
 class Client(object):
     def __init__(self, server: str):
