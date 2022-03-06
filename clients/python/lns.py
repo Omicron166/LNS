@@ -18,7 +18,8 @@ class Client(object):
             self.server = 'http://' + url.netloc
         else:
             self.server = url.scheme + '://' + url.netloc
-        status = requests.get(self.server + '/index.json').json()
+        try: status = requests.get(self.server + '/index.json').json()
+        except: raise IncompatibleServer
         if not status['version'] in server_version:
             raise IncompatibleServer()
 
