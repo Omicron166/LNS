@@ -34,8 +34,8 @@ class Client(object):
 
     def dig(self, name: str):
         try:
-            r = requests.get(self.server + '/' + name)
             if r.status_code != 200: raise Exception()
+            r = requests.get(self.server + '/records/' + name + '.json')
         except: raise NameNotFound('The record does not exist')
 
         try: return r.json()
