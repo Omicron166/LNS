@@ -1,18 +1,31 @@
-#Before running this script, run python -m http.server in the server folder
+import unittest
+from lns import Client, IncompatibleServer, NameNotFound
 
-from lns import Client #The actual client
-from lns import IncompatibleServer, NameNotFound #Errors raised by the client
+class LNSTest(unittest.TestCase):
+    def test_lns_server_connection(self):
+        #Test connection to server
+        try: Client('https://omicronlns.glitch.me')
+        except: self.failureException()
 
-try:
-    resolver = Client('http://localhost:8000')
-except IncompatibleServer:
-    #The server is not compatible with yout client
-    pass
+        #test exception raise
+        with self.assertRaises(IncompatibleServer):
+            Client('google.com')
+        
+    def test_lns_resolver(self):
+        #test the resolver system
+        lns = Client('https://omicronlns.glitch.me')
+        self.assertEqual(lns.resolve('template'), 'dns.google.com')
 
-print(resolver.resolve('template'))
-#Expected output: dns.google.com
+    def test_lns_dig(self):
+        #test the dig system
+        lns = Client('https://omicronlns.glitch.me')
+        self.assertEqual(lns.dig('template'), {
+            "recorder": "Omicron166",
+            "record": {
+                "link": "dns.google.com",
+                "txt": "dns like txt record"
+            }
+        })
 
-try:
-    print(resolver.resolve('Paraguay'))
-except NameNotFound: #When a name can't be resolved, the client raise this exception
-    print('The regsitry does not exists')
+if __name__ == '__main__':
+    unittest.main()
