@@ -4,16 +4,17 @@ from lns import Client, IncompatibleServer, NameNotFound
 class LNSTest(unittest.TestCase):
     def test_lns_server_connection(self):
         #Test connection to server with http scheme
-        try: Client('https://omicronlns.glitch.me')
-        except: self.failureException()
+        Client('https://omicronlns.glitch.me')
 
         #Test connection to server with lns scheme
-        try: Client('lns://omicronlns.glitch.me')
-        except: self.failureException()
+        Client('lns://omicronlns.glitch.me')
+
+        #Test connection to server without scheme
+        Client('omicronlns.glitch.me')
 
         #test exception raise
         with self.assertRaises(IncompatibleServer):
-            Client('google.com')
+            Client('https://google.com')
         
     def test_lns_resolver(self):
         #test the resolver system
