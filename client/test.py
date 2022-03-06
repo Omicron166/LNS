@@ -3,8 +3,12 @@ from lns import Client, IncompatibleServer, NameNotFound
 
 class LNSTest(unittest.TestCase):
     def test_lns_server_connection(self):
-        #Test connection to server
+        #Test connection to server with http scheme
         try: Client('https://omicronlns.glitch.me')
+        except: self.failureException()
+
+        #Test connection to server with lns scheme
+        try: Client('lns://omicronlns.glitch.me')
         except: self.failureException()
 
         #test exception raise

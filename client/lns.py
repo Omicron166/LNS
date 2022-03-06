@@ -16,7 +16,7 @@ class NameNotFound(Exception):
 class Client(object):
     def __init__(self, server: str):
         url = urlparse(server)
-        if not url.scheme:
+        if not url.scheme or url.scheme == 'lns':
             self.server = 'http://' + url.netloc
         else:
             self.server = url.scheme + '://' + url.netloc
