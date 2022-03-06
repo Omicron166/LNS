@@ -16,8 +16,8 @@ class NameNotFound(Exception):
 class Client(object):
     def __init__(self, server: str):
         url = urlparse(server)
-        if not url.scheme or url.scheme == 'lns':
-            self.server = 'http://' + url.netloc
+        if url.scheme == '' or url.scheme == 'lns':
+            self.server = 'http://' + url.netloc + url.path #when a schema is not provided, netloc is '' and path has the server url
         else:
             self.server = url.scheme + '://' + url.netloc
         try: status = requests.get(self.server + '/index.json').json()
