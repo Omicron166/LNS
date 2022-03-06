@@ -21,9 +21,9 @@ class Client(object):
         else:
             self.server = url.scheme + '://' + url.netloc
         try: status = requests.get(self.server + '/index.json').json()
-        except: raise IncompatibleServer
+        except: raise IncompatibleServer('This is not a LNS server')
         if not status['version'] in server_version:
-            raise IncompatibleServer()
+            raise IncompatibleServer('Version not supported of the server')
 
     def resolve(self, name: str):
         try:
