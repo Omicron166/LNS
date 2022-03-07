@@ -2,13 +2,15 @@ import unittest
 from lns import Client, IncompatibleServer, NameNotFound
 
 class LNSTest(unittest.TestCase):
-    def test_lns_server_connection(self):
+    def test_lns_server_http(self):
         #Test connection to server with http scheme
         Client('https://omicronlns.glitch.me')
 
+    def test_lns_server_lns(self):
         #Test connection to server with lns scheme
         Client('lns://omicronlns.glitch.me')
 
+    def test_lns_server_schemeless(self):
         #Test connection to server without scheme
         Client('omicronlns.glitch.me')
 
