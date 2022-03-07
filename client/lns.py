@@ -4,7 +4,7 @@ import requests
 from urllib.parse import urlparse
 
 #accepted server versions
-server_version = [1]
+server_version = 1
 
 #client version
 client_version = '1.2.0'
@@ -24,7 +24,7 @@ class Client(object):
             self.server = url.scheme + '://' + url.netloc + url.path
         try: status = requests.get(self.server + '/index.json').json()
         except: raise IncompatibleServer('This is not a LNS server')
-        if not status['version'] in server_version:
+        if not index['version'] == server_version:
             raise IncompatibleServer('Version not supported of the server')
         else: self.index = status
 
