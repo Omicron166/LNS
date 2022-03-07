@@ -4,10 +4,10 @@ import requests
 from urllib.parse import urlparse
 
 #accepted server versions
-server_version = 1
+server_version = 2
 
 #client version
-client_version = '1.2.0'
+client_version = '2.0.0'
 
 class IncompatibleServer(Exception):
     pass
