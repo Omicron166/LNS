@@ -27,7 +27,10 @@ class LNSTest(unittest.TestCase):
         #test the dig system
         lns = Client('https://omicronlns.glitch.me')
         self.assertEqual(lns.dig('template'), {
-            "recorder": "Omicron166",
+            "record_owner": {
+                "name": "Omicron166",
+                "email": "omicron166@protonmail.com"
+            },
             "record": {
                 "link": "dns.google.com",
                 "txt": "dns like txt record"
