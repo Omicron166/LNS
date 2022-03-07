@@ -1,5 +1,5 @@
 #Written by Omicron166
-from lns import Client, IncompatibleServer, NameNotFound
+from lns import Client, IncompatibleServer, NameNotFound, client_version as version
 from urllib.parse import urlparse
 
 user = 'client' #SPOILER ALERT: it never change (for now)
@@ -16,6 +16,11 @@ while True:
 
     #Exit
     if command.startswith('exit'): break
+
+    elif command.startswith('version'):
+        print('LNS client version:', version)
+        if not client == None:
+            print('LNS server version:', client.index['version'])
 
     #Connect to a LNS server
     elif command.startswith('connect'):
