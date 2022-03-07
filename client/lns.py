@@ -1,11 +1,13 @@
 #Written by Omicron166
-#Version 1.2.0
 
 import requests
 from urllib.parse import urlparse
 
-#accepted server version
+#accepted server versions
 server_version = [1]
+
+#client version
+client_version = '1.2.0'
 
 class IncompatibleServer(Exception):
     pass
