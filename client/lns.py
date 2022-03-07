@@ -19,7 +19,7 @@ class Client(object):
         if url.scheme == '' or url.scheme == 'lns':
             self.server = 'http://' + url.netloc + url.path #when a schema is not provided, netloc is '' and path has the server url
         else:
-            self.server = url.scheme + '://' + url.netloc
+            self.server = url.scheme + '://' + url.netloc + url.path
         try: status = requests.get(self.server + '/index.json').json()
         except: raise IncompatibleServer('This is not a LNS server')
         if not status['version'] in server_version:
