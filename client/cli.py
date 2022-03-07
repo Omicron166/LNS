@@ -78,7 +78,7 @@ while True:
 
         ## Info dig begin
         #Recorder name
-        print('Dig of ', name)
+        print('Dig of', name)
         if result['recorder'] == '':
             print('Recorder: anonymous')
         else:
