@@ -73,7 +73,7 @@ while True:
             if command.split(' ')[2] == 'raw':
                 print(result)
                 continue
-        except KeyError:
+        except IndexError:
             print(result)
             continue
 
