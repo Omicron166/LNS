@@ -26,6 +26,7 @@ class Client(object):
         except: raise IncompatibleServer('This is not a LNS server')
         if not status['version'] in server_version:
             raise IncompatibleServer('Version not supported of the server')
+        else: self.index = status
 
     def resolve(self, name: str):
         try:
