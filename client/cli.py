@@ -18,7 +18,7 @@ while True:
     if command.startswith('exit'): break
 
     #Connect to a LNS server
-    if command.startswith('connect'):
+    elif command.startswith('connect'):
         link = command.split(' ')[1] #Get server url
         try:
             print('Trying connection to ', link)
