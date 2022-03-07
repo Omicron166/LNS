@@ -22,11 +22,11 @@ class Client(object):
             self.server = 'http://' + url.netloc + url.path #when a schema is not provided, netloc is '' and path has the server url
         else:
             self.server = url.scheme + '://' + url.netloc + url.path
-        try: status = requests.get(self.server + '/index.json').json()
+        try: index = requests.get(self.server + '/index.json').json()
         except: raise IncompatibleServer('This is not a LNS server')
         if not index['version'] == server_version:
             raise IncompatibleServer('Version not supported of the server')
-        else: self.index = status
+        else: self.index = index
 
     def resolve(self, name: str):
         try:
