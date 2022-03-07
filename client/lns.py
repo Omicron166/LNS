@@ -1,5 +1,5 @@
 #Written by Omicron166
-#Version 1.1.2
+#Version 1.2.0
 
 import requests
 from urllib.parse import urlparse
