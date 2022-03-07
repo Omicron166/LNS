@@ -29,7 +29,7 @@ while True:
         client = Client(link)
         print('Connected successfully')
         url = urlparse(link)
-        server = url.netloc
+        server = url.netloc + url.path
         continue
 
     #Disconnect from the server
