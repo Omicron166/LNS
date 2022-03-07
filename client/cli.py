@@ -74,8 +74,7 @@ while True:
                 print(result)
                 continue
         except IndexError:
-            print(result)
-            continue
+            pass
 
         ## Info dig begin
         #Recorder name
