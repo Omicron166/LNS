@@ -1,7 +1,7 @@
 #Written by Omicron166
 from lns import Client, IncompatibleServer, NameNotFound, client_version as version
 
-user = 'client' #SPOILER ALERT: it never change (for now)
+user = 'client' #SPOILER ALERT: this never change (for now)
 server = 'undefined' #server netloc
 client = None #The future lns.Client instance
 
@@ -20,6 +20,7 @@ while True:
         print('LNS client version:', version)
         if not client == None:
             print('LNS server version:', client.index['version'])
+        continue
 
     #Connect to a LNS server
     elif command.startswith('connect'):
