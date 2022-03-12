@@ -1,7 +1,5 @@
 #Written by Omicron166
-
 import requests
-from urllib.parse import urlparse
 
 #accepted server versions
 server_version = 2
