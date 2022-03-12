@@ -1,8 +1,8 @@
 # LNS (Linked Name System)
 
-<p>Is a simple replace of DNS designed for small projects in development.</p>
+<p>It's a simple "replace" of DNS designed for small projects.</p>
 
-<p>A LNS server can be run 24/7 for free in [glitch](https://glitch.com)</p>
+A LNS server can be run 24/7 for free in [glitch](https://glitch.com)
 
 ### WARNING
 
