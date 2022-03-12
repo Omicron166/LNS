@@ -22,11 +22,14 @@ class Client(object):
         elif server.startswith(('http://', 'https://')): self.server = server
         else: self.server = 'http://' + server
 
+        #server check
         try: index = requests.get(self.server + '/index.json').json()
         except: raise IncompatibleServer('This is not a LNS server')
+
+        #version check
         if not index['version'] == server_version:
             raise IncompatibleServer('Version not supported of the server')
-        else: self.index = index
+        else: self.index = index 
 
     def resolve(self, name: str):
         try:
