@@ -1,8 +1,8 @@
 import unittest
 from lns import Client, IncompatibleServer, NameNotFound
 
-server_url = 'omicronlns.glitch.me:80'
-ssl_server_url = 'omicronlns.glitch.me:443'
+server_url = 'omicronlns.glitch.me:80/beta'
+ssl_server_url = 'omicronlns.glitch.me:443/beta'
 
 class LNSTest(unittest.TestCase):
     def test_lns_server_http(self):
