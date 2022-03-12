@@ -1,6 +1,5 @@
 #Written by Omicron166
 from lns import Client, IncompatibleServer, NameNotFound, client_version as version
-from urllib.parse import urlparse
 
 user = 'client' #SPOILER ALERT: it never change (for now)
 server = 'undefined' #server netloc
@@ -33,8 +32,8 @@ while True:
             continue
         client = Client(link)
         print('Connected successfully')
-        url = urlparse(link)
-        server = url.netloc + url.path
+        
+        server = link.replace(('lns://', 'http://', 'https://'), '')
         continue
 
     #Disconnect from the server
