@@ -17,11 +17,11 @@ class NameNotFound(Exception):
 
 class Client(object):
     def __init__(self, server: str):
-        url = urlparse(server)
-        if url.scheme == '' or url.scheme == 'lns':
-            self.server = 'http://' + url.netloc + url.path #when a schema is not provided, netloc is '' and path has the server url
-        else:
-            self.server = url.scheme + '://' + url.netloc + url.path
+        #url parser
+        if server.startswith('lns://'): self.server = server.replace('lns://', 'http://')
+        elif server.startswith(('http://', 'https://')): self.server = server
+        else: self.server = 'http://' + server
+
         try: index = requests.get(self.server + '/index.json').json()
         except: raise IncompatibleServer('This is not a LNS server')
         if not index['version'] == server_version:
