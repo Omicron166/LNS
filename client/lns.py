@@ -8,10 +8,17 @@ server_version = 2
 client_version = '2.0.0'
 
 class IncompatibleServer(Exception):
+    """Raised when the server version doesn't match the client version"""
     pass
 
 class NameNotFound(Exception):
+    """Raised when the server don't return status 200"""
     pass
+
+class NetError(Exception):
+    """Raised when requests.get throw an exception"""
+    pass
+
 
 class Client(object):
     def __init__(self, server: str):
