@@ -1,5 +1,5 @@
 import unittest
-from lns import Client, IncompatibleServer, NameNotFound
+from lns import Client, BadServer, NameNotFound
 
 server_url = 'omicronlns.glitch.me:80/beta'
 ssl_server_url = 'omicronlns.glitch.me:443/beta'
@@ -17,13 +17,17 @@ class LNSTest(unittest.TestCase):
         #Test connection to server with lns scheme
         Client('lns://' + server_url)
 
+    def test_lns_server_lnss(self):
+        #Test connection to server with lnss scheme
+        Client('lnss://' + ssl_server_url)
+
     def test_lns_server_schemeless(self):
         #Test connection to server without scheme
         Client(server_url)
 
     def test_not_server_detection(self):
         #test exception raise
-        with self.assertRaises(IncompatibleServer):
+        with self.assertRaises(BadServer):
             Client('https://google.com')
         
     def test_lns_resolver(self):
