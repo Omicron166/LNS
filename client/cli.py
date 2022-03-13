@@ -33,6 +33,7 @@ while True:
             continue
         except NetError:
             print('Connection error')
+            continue
         print('Connected successfully')
         
         server = link.replace(
