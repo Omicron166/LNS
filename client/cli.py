@@ -34,7 +34,15 @@ while True:
         client = Client(link)
         print('Connected successfully')
         
-        server = link.replace('lns://', '').replace('http://', '').replace('https://', '')
+        server = link.replace(
+            'lns://', ''
+        ).replace(
+            'lnss://', ''
+        ).replace(
+            'http://', ''
+        ).replace(
+            'https://', ''
+        )
         continue
 
     #Disconnect from the server
