@@ -1,5 +1,5 @@
 #Written by Omicron166
-from lns import Client, IncompatibleServer, NameNotFound, client_version as version
+from lns import Client, BadServer, NameNotFound, NetError, client_version as version
 
 user = 'client' #SPOILER ALERT: this never change (for now)
 server = 'undefined' #server netloc
@@ -26,12 +26,13 @@ while True:
     elif command.startswith('connect'):
         link = command.split(' ')[1] #Get server url
         try:
-            print('Trying connection to ', link)
-            Client(link)
-        except IncompatibleServer:
-            print('The server is not valid')
+            print('Trying connection to', link)
+            client = Client(link)
+        except BadServer:
+            print("This isn't a LNS server")
             continue
-        client = Client(link)
+        except NetError:
+            print('Connection error')
         print('Connected successfully')
         
         server = link.replace(
