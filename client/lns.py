@@ -23,9 +23,11 @@ class NetError(Exception):
 class Client(object):
     def __init__(self, server: str):
         #url parser
-        if server.startswith('lns://'): self.server = server.replace('lns://', 'http://')
-        elif server.startswith(('http://', 'https://')): self.server = server
-        else: self.server = 'http://' + server
+        if server.startswith('lns://'): self.server = server.replace('lns://', 'http://') # lns://host/path like url
+        elif server.startswith('lnss://'): self.server = server.replace('lnss://', 'https://') # lnss://host/path like url
+        elif server.startswith(('http://', 'https://')): self.server = server # https://host/path like url
+        else: self.server = 'http://' + server # host/path like url (schemeless)
+
 
         #server check
         try: index = requests.get(self.server + '/index.json').json()
