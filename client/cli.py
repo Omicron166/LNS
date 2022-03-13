@@ -95,11 +95,11 @@ while True:
         if result['recorder'] == '':
             print('Recorder: anonymous')
         else:
-            print('Recorder: ', result['recorder'])
+            print('Recorder:', result['recorder'])
 
         #Record link
-        print('Record link: ', result['record']['link'])
+        print('Record link:', result['record']['link'])
 
         #Record txt
         if result['record']['txt'] != '':
-            print('Record TXT entry: ', result['record']['txt'])
+            print('Record TXT entry:', result['record']['txt'])
