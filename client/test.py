@@ -1,5 +1,5 @@
 import unittest
-from lns import Client, BadServer, NameNotFound
+from lns import Client, BadServer, NameNotFound, NetError
 
 server_url = 'omicronlns.glitch.me:80/beta'
 ssl_server_url = 'omicronlns.glitch.me:443/beta'
@@ -56,4 +56,16 @@ class LNSTest(unittest.TestCase):
             lns.dig('paraguay')
 
 if __name__ == '__main__':
-    unittest.main()
+    print('Checking test servers')
+    try:
+        Client(server_url)
+        Client(ssl_server_url)
+    except NetError:
+        print("Can't connect to test servers")
+        exit()
+    except BadServer:
+        print("The servers aren't compatible")
+        exit()
+    else:
+        print('Test servers ready, running tests')
+        unittest.main()
