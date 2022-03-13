@@ -28,6 +28,11 @@ class Client(object):
         elif server.startswith(('http://', 'https://')): self.server = server # https://host/path like url
         else: self.server = 'http://' + server # host/path like url (schemeless)
 
+        #index.json get request
+        try:
+            request = requests.get(self.server + '/index.json') #GET /index.json
+        except Exception as e:
+            raise NetError(e) #Foward net error to dev
 
         #server check
         try: index = requests.get(self.server + '/index.json').json()
