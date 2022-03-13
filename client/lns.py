@@ -13,7 +13,7 @@ class BadServer(Exception):
     pass
 
 class NameNotFound(Exception):
-    """Raised when the server don't return status 200"""
+    """Raised when the server don't return the json file"""
     pass
 
 class NetError(Exception):
@@ -23,6 +23,11 @@ class NetError(Exception):
 
 class Client(object):
     def __init__(self, server: str):
+        """
+        Client instance for lns servers.
+        \n
+        Can throw NetError and BadServer exceptions.
+        """
         #url parser
         if server.startswith('lns://'): self.server = server.replace('lns://', 'http://') # lns://host/path like url
         elif server.startswith('lnss://'): self.server = server.replace('lnss://', 'https://') # lnss://host/path like url
@@ -35,7 +40,7 @@ class Client(object):
         except Exception as e:
             raise NetError(e) #Foward net error to dev
 
-        #server check
+        #server checks
 
         ##status check
         if request.status_code != 200:
@@ -54,6 +59,11 @@ class Client(object):
 
 
     def resolve(self, name: str):
+        """
+        Return a string with the value of the resolved name.
+        \n
+        Can throw NameNotFound exception.
+        """
         #Request section
         try:
            r = requests.get(self.server + '/records/' + name + '.json') # GET /records/name.json
@@ -68,6 +78,11 @@ class Client(object):
 
 
     def dig(self, name: str):
+        """
+        Return the parsed json from the server.
+        \n
+        Can throw NameNotFound exception.
+        """
         #Request section
         try:
            r = requests.get(self.server + '/records/' + name + '.json') # GET /records/name.json
