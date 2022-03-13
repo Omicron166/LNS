@@ -1,4 +1,5 @@
 *.spec
 *.pyc
+*.conf
 *dist/
 *build/

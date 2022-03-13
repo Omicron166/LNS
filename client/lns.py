@@ -1,13 +1,11 @@
 #Written by Omicron166
-
 import requests
-from urllib.parse import urlparse
 
 #accepted server versions
-server_version = [1]
+server_version = 2
 
 #client version
-client_version = '1.2.0'
+client_version = '2.0.0'
 
 class IncompatibleServer(Exception):
     pass
@@ -17,15 +15,19 @@ class NameNotFound(Exception):
 
 class Client(object):
     def __init__(self, server: str):
-        url = urlparse(server)
-        if url.scheme == '' or url.scheme == 'lns':
-            self.server = 'http://' + url.netloc + url.path #when a schema is not provided, netloc is '' and path has the server url
-        else:
-            self.server = url.scheme + '://' + url.netloc + url.path
-        try: status = requests.get(self.server + '/index.json').json()
+        #url parser
+        if server.startswith('lns://'): self.server = server.replace('lns://', 'http://')
+        elif server.startswith(('http://', 'https://')): self.server = server
+        else: self.server = 'http://' + server
+
+        #server check
+        try: index = requests.get(self.server + '/index.json').json()
         except: raise IncompatibleServer('This is not a LNS server')
-        if not status['version'] in server_version:
+
+        #version check
+        if not index['version'] == server_version:
             raise IncompatibleServer('Version not supported of the server')
+        else: self.index = index 
 
     def resolve(self, name: str):
         try:
