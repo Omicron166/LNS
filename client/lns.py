@@ -54,19 +54,28 @@ class Client(object):
 
 
     def resolve(self, name: str):
+        #Request section
         try:
-            r = requests.get(self.server + '/records/' + name + '.json')
-        except: raise NameNotFound('The record does not exist')
-        if r.status_code != 200: raise NameNotFound('The record does not exist')
+           r = requests.get(self.server + '/records/' + name + '.json') # GET /records/name.json
+        except:
+            raise NameNotFound('The record does not exist')
+        if r.status_code != 200:
+            raise NameNotFound('The record does not exist')
 
+        #Parse section
         try: return r.json()['record']['link']
         except: raise NameNotFound('The record format is invalid')
 
-    def dig(self, name: str):
-        try:
-            r = requests.get(self.server + '/records/' + name + '.json')
-        except: raise NameNotFound('The record does not exist')
-        if r.status_code != 200: raise NameNotFound('The record does not exist')
 
+    def dig(self, name: str):
+        #Request section
+        try:
+           r = requests.get(self.server + '/records/' + name + '.json') # GET /records/name.json
+        except:
+            raise NameNotFound('The record does not exist')
+        if r.status_code != 200:
+            raise NameNotFound('The record does not exist')
+
+        #Parse section
         try: return r.json()
         except: raise NameNotFound('The record format is invalid')
