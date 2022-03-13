@@ -8,7 +8,7 @@ server_version = 2
 #client version
 client_version = '2.0.0'
 
-class IncompatibleServer(Exception):
+class BadServer(Exception):
     """Raised when the server version doesn't match the client version"""
     pass
 
@@ -39,17 +39,17 @@ class Client(object):
 
         ##status check
         if request.status_code != 200:
-            raise IncompatibleServer("This isn't a LNS server, request status != 200")
+            raise BadServer("This isn't a LNS server, request status != 200")
         
         ##json check
         try:
             index = request.json()
         except JSONDecodeError:
-            raise IncompatibleServer("This isn't a LNS server, json decode error")
+            raise BadServer("This isn't a LNS server, json decode error")
 
         ##version check
         if not index['version'] == server_version:
-            raise IncompatibleServer("Server version doesn't match client version")
+            raise BadServer("Server version doesn't match client version")
         else: self.index = index
 
 
