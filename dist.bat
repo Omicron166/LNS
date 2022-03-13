@@ -18,4 +18,5 @@ rem #server-bin package
 cd ..\server-bin
 pyinstaller server.py --onefile
 copy .\dist\server.exe ..\dist\server.exe
+cd ..
 @echo on
