@@ -1,4 +1,5 @@
 #Written by Omicron166
+from json import JSONDecodeError
 import requests
 
 #accepted server versions
@@ -35,13 +36,22 @@ class Client(object):
             raise NetError(e) #Foward net error to dev
 
         #server check
-        try: index = requests.get(self.server + '/index.json').json()
-        except: raise IncompatibleServer('This is not a LNS server')
 
-        #version check
+        ##status check
+        if request.status_code != 200:
+            raise IncompatibleServer("This isn't a LNS server, request status != 200")
+        
+        ##json check
+        try:
+            index = request.json()
+        except JSONDecodeError:
+            raise IncompatibleServer("This isn't a LNS server, json decode error")
+
+        ##version check
         if not index['version'] == server_version:
-            raise IncompatibleServer('Version not supported of the server')
-        else: self.index = index 
+            raise IncompatibleServer("Server version doesn't match client version")
+        else: self.index = index
+
 
     def resolve(self, name: str):
         try:
