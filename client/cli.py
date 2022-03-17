@@ -1,5 +1,5 @@
 #Written by Omicron166
-from lns import Client, IncompatibleServer, NameNotFound, client_version as version
+from lns import Client, BadServer, NameNotFound, NetError, client_version as version
 
 user = 'client' #SPOILER ALERT: this never change (for now)
 server = 'undefined' #server netloc
@@ -26,15 +26,25 @@ while True:
     elif command.startswith('connect'):
         link = command.split(' ')[1] #Get server url
         try:
-            print('Trying connection to ', link)
-            Client(link)
-        except IncompatibleServer:
-            print('The server is not valid')
+            print('Trying connection to', link)
+            client = Client(link)
+        except BadServer:
+            print("This isn't a LNS server")
             continue
-        client = Client(link)
+        except NetError:
+            print('Connection error')
+            continue
         print('Connected successfully')
         
-        server = link.replace('lns://', '').replace('http://', '').replace('https://', '')
+        server = link.replace(
+            'lns://', ''
+        ).replace(
+            'lnss://', ''
+        ).replace(
+            'http://', ''
+        ).replace(
+            'https://', ''
+        )
         continue
 
     #Disconnect from the server
@@ -87,11 +97,11 @@ while True:
         if result['recorder'] == '':
             print('Recorder: anonymous')
         else:
-            print('Recorder: ', result['recorder'])
+            print('Recorder:', result['recorder'])
 
         #Record link
-        print('Record link: ', result['record']['link'])
+        print('Record link:', result['record']['link'])
 
         #Record txt
         if result['record']['txt'] != '':
-            print('Record TXT entry: ', result['record']['txt'])
+            print('Record TXT entry:', result['record']['txt'])
