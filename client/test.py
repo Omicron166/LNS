@@ -59,7 +59,7 @@ if __name__ == '__main__':
     print('Checking test servers')
     try:
         Client(server_url)
-        Client(ssl_server_url)
+        Client('lnss://' + ssl_server_url)
     except NetError:
         print("Can't connect to test servers")
         exit()
