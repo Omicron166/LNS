@@ -6,7 +6,7 @@ import requests
 server_version = 2
 
 #client version
-client_version = '2.0.0'
+client_version = '2.1.0'
 
 class BadServer(Exception):
     """Raised when the server version doesn't match the client version"""
