@@ -1,9 +1,9 @@
 # LNS (Linked Name System)
 
-<p>It's a simple "replace" of DNS designed for small projects.</p>
+<p>Just a joke taken too far.</p>
 
 A LNS server can be run 24/7 for free in [glitch](https://glitch.com)
 
 ### WARNING
 
-This software is not designed for production and don't have any security control
+If you want to use this software in a production enviroment, you're clinically insane
